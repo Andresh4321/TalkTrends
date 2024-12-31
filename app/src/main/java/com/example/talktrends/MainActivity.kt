@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         // Set button click listener to navigate to DashboardActivity or RegistrationActivity
         button.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java) // Change to RegistrationActivity if needed
+            val intent = Intent(this, RegistrationActivity::class.java) // Change to RegistrationActivity if needed
             startActivity(intent)
         }
     }

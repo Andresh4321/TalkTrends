@@ -1,5 +1,6 @@
 package com.example.talktrends
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
@@ -23,6 +24,12 @@ class RegistrationActivity : AppCompatActivity() {
         val termsCheckBox: CheckBox = findViewById(R.id.cbTerms)
         val registerButton: Button = findViewById(R.id.btnRegister)
         val loginTextView: TextView = findViewById(R.id.tvLogin)
+        val tvLogin: TextView = findViewById(R.id.tvLogin)
+        tvLogin.setOnClickListener {
+            val intent = Intent(this, DashboardActivity::class.java)
+            startActivity(intent)
+        }
+
 
         registerButton.setOnClickListener {
             val username = usernameEditText.text.toString()
