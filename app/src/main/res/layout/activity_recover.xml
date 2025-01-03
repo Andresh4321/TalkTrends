@@ -3,13 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Register"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/loginbackground"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".RegistrationActivity">
+    tools:context=".RecoverActivity">
 
     <ImageView
         android:id="@+id/imageView4"
@@ -19,7 +19,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="467dp"
         android:layout_gravity="center"
         android:layout_marginStart="38dp"
         android:layout_marginTop="50dp"
@@ -34,13 +34,20 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/logInLayout"
+                android:id="@+id/recoverLayout"
                 android:layout_width="match_parent"
-                android:layout_height="295dp"
+                android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:gravity="center"
                 android:orientation="vertical"
                 android:padding="25dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recover Your Account"
+                    android:textColor="@color/light_Red"
+                    android:textSize="20dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -78,11 +85,11 @@
                     app:shapeAppearanceOverlay="@style/Button4">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/email"
+                        android:id="@+id/etEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="textPersonName|textEmailAddress"
+                        android:inputType="textEmailAddress"
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:textStyle="normal" />
@@ -95,14 +102,37 @@
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
-                    android:hint="Password"
+                    android:hint="Recovery Word"
+                    app:boxStrokeColor="#4E4A4A"
+                    app:boxStrokeWidth="1dp"
+                    app:shapeAppearanceOverlay="@style/Button4">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/recover"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:textColor="@color/black"
+                        android:textSize="13sp"
+                        android:textStyle="normal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="5dp"
+                    android:hint="New Password"
                     app:boxStrokeColor="#4E4A4A"
                     app:boxStrokeWidth="1dp"
                     app:endIconMode="password_toggle"
                     app:shapeAppearanceOverlay="@style/Button4">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPassword"
+                        android:id="@+id/newPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -116,61 +146,54 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Recover"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginRight="5dp"
-                    android:hint="Recovery Word"
+                    android:hint="Confirm Password"
                     app:boxStrokeColor="#4E4A4A"
                     app:boxStrokeWidth="1dp"
+                    app:endIconMode="password_toggle"
                     app:shapeAppearanceOverlay="@style/Button4">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/recoveryWord"
+                        android:id="@+id/confirmPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
-                        android:inputType="text"
+                        android:inputType="textPassword"
                         android:textColor="@color/black"
                         android:textSize="13sp"
                         android:textStyle="normal" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <CheckBox
-                    android:id="@+id/cbTerms"
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:elevation="15dp"
+                    android:gravity="center"
+                    android:text="Confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@color/textColor"
+                    android:textSize="17sp"
+                    app:backgroundTint="@color/pinkColor"
+                    app:shapeAppearanceOverlay="@style/Button5" />
+
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="I agree terms and conditions"
-                    android:textColor="#4E4A4A" />
+                    android:id="@+id/Back"
+                    android:text="Back to the Login"
+                    android:textColor="@color/light_Red"
+                    android:textSize="15dp" />
+
             </LinearLayout>
 
-            <Button
-                android:id="@+id/btnRegister"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"
-                android:elevation="15dp"
-                android:gravity="center"
-                android:text="Register"
-                android:textAllCaps="false"
-                android:textColor="@color/textColor"
-                android:textSize="17sp"
-                app:backgroundTint="@color/pinkColor"
-                app:shapeAppearanceOverlay="@style/Button5" />
-
-            <TextView
-                android:id="@+id/tvLogin"
-                android:layout_width="wrap_content"
-                android:layout_height="105dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="16dp"
-                android:text="Already have an account? Login"
-                android:textColor="#4E4A4A"
-                android:textSize="14sp"
-                android:textStyle="bold" />
         </LinearLayout>
+
     </androidx.cardview.widget.CardView>
+
 </LinearLayout>

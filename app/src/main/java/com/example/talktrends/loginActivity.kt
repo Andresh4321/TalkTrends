@@ -23,11 +23,16 @@ class loginActivity : AppCompatActivity() {
         val passwordEditText: TextInputEditText = findViewById(R.id.passwords)
         val loginButton: Button = findViewById(R.id.singIn)
         val signUp = findViewById<TextView>(com.example.talktrends.R.id.singUp)
+        val recover= findViewById<TextView>(R.id.recover)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+        recover.setOnClickListener{
+            val intent=Intent(this,RecoverActivity::class.java)
+            startActivity(intent)
         }
 
         signUp.setOnClickListener {
