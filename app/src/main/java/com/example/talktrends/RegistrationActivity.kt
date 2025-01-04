@@ -21,6 +21,7 @@ class RegistrationActivity : AppCompatActivity() {
 
         val usernameEditText: EditText = findViewById(R.id.etUsername)
         val emailEditText: EditText = findViewById(R.id.email)
+        val recover: EditText=findViewById(R.id.recoveryWord)
         val passwordEditText: EditText = findViewById(R.id.etPassword)
         val termsCheckBox: CheckBox = findViewById(R.id.cbTerms)
         val registerButton: Button = findViewById(R.id.btnRegister)
@@ -35,6 +36,7 @@ class RegistrationActivity : AppCompatActivity() {
         registerButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val email = emailEditText.text.toString()
+            val recover =recover.text.toString()
             val password = passwordEditText.text.toString()
             val termsAccepted = termsCheckBox.isChecked
 
@@ -48,6 +50,7 @@ class RegistrationActivity : AppCompatActivity() {
                     putString("username", username)
                     putString("email", email)
                     putString("password", password)
+                    putString("recover", recover)
                     apply()
                 }
                 Toast.makeText(this, "Registered Successfully!", Toast.LENGTH_SHORT).show()
