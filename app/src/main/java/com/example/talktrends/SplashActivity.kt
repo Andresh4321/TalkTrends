@@ -24,6 +24,6 @@ class SplashActivity : AppCompatActivity() {
             val intent = Intent(this@SplashActivity, loginActivity::class.java)
             startActivity(intent)
             finish() // Finish SplashActivity to prevent back navigation to it
-//        }, 4000)
+          }, 4000)
     }
 }
