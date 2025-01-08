@@ -112,6 +112,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
+
                         android:inputType="textPersonName|textEmailAddress"
                         android:textColor="@color/black"
                         android:textSize="13sp"
