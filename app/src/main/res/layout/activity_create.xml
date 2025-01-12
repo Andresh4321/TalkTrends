@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:background="#FFFFFF"
+    tools:context=".UI.Activity.CreateActivity">
+
+<!-- Top Section -->
+    <!-- Text Field and Spinner Section -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <!-- Text Label -->
+        <EditText
+            android:layout_width="200dp"
+            android:id="@+id/edit_text"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/lavender"
+            android:gravity="start"
+            android:hint="Enter text"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:visibility="visible" />
+
+        <!-- Spinner -->
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:background="@color/lavender"
+            android:hint="Genres"
+
+            android:spinnerMode="dropdown"
+            android:textColor="@color/black"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerCrop" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <!-- Insert Image Button -->
+
+        <!-- Post Button -->
+        <Button
+            android:id="@+id/btn_insert_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#00FF00"
+            android:text="Insert Image"
+            android:textColor="#000000" />
+
+        <Button
+            android:id="@+id/btn_post"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Post"
+            android:background="#00FF00"
+            android:textColor="#000000"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>
