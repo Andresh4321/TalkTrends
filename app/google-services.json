@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1067632965062",
+    "project_id": "talktrends--44c",
+    "storage_bucket": "talktrends--44c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067632965062:android:b30e1c8375e9b71e3b2ec7",
+        "android_client_info": {
+          "package_name": "com.example.talktrends"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYWEM-G0-65ljzXdimG6WBSGOQmmYe-u0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

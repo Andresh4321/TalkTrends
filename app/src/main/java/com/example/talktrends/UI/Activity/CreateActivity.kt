@@ -1,6 +1,6 @@
-package com.example.talktrends
+package com.example.talktrends.UI.Activity
 
-import Repositary.PostRepository
+import com.example.talktrends.Repositary.PostRepository
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -17,7 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.talktrends.R
-import model.Post
+import com.example.talktrends.model.Post
 
 class CreateActivity : AppCompatActivity() {
 

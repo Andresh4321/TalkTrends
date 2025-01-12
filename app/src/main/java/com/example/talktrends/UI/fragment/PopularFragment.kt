@@ -1,6 +1,6 @@
-package fragment
+package com.example.talktrends.UI.fragment
 
-import Repositary.PostRepository
+import com.example.talktrends.Repositary.PostRepository
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater

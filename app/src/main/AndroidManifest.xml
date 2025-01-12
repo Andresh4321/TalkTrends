@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -16,11 +18,15 @@
         android:theme="@style/Theme.TalkTrends"
         tools:targetApi="31">
         <activity
-            android:name=".CreateActivity"
+            android:name=".UI.Activity.Login_Activity"
+            android:exported="false" />
+
+        <activity
+            android:name=".UI.Activity.CreateActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
-            android:name=".CatActivity"
+            android:name=".UI.Activity.CatActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,10 +35,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecoverActivity"
+            android:name=".UI.Activity.RecoverActivity"
+            android:exported="true" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
+        <activity
+            android:name=".UI.Activity.StartActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".UI.Activity.PostActivity"
             android:exported="false" />
         <activity
-            android:name=".StartActivity"
+            android:name=".UI.Activity.DashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,22 +65,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".loginActivity"
-            android:exported="false"></activity>
-        <activity
-            android:name=".PostActivity"
-            android:exported="false" />
-        <activity
-            android:name=".DashboardActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".RegistrationActivity"
+            android:name=".UI.Activity.RegistrationActivity"
             android:exported="false" />
     </application>
 

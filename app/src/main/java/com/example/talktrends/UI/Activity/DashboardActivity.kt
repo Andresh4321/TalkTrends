@@ -1,20 +1,19 @@
-package com.example.talktrends
+package com.example.talktrends.UI.Activity
 
-import adapter.PostFragmentAdapter
+import com.example.talktrends.adapter.PostFragmentAdapter
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.talktrends.R
 
 import com.example.talktrends.databinding.ActivityDashboardBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import fragment.PopularFragment
+import com.example.talktrends.UI.fragment.PopularFragment
 
 class DashboardActivity : AppCompatActivity() {
 
@@ -52,13 +51,14 @@ class DashboardActivity : AppCompatActivity() {
         }
 
         // Navigate to CreateActivity when create button is clicked
-        binding.create.setOnClickListener {
+        binding.fabAdd.setOnClickListener {
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
 
             val intent = Intent(this, CreateActivity::class.java)
             startActivity(intent)
         }
+
 
     }
 }
