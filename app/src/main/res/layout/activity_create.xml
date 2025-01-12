@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:padding="8dp"
     android:background="#FFFFFF"
-    tools:context=".CreateActivity">
+    tools:context=".UI.Activity.CreateActivity">
 
 <!-- Top Section -->
     <!-- Text Field and Spinner Section -->
