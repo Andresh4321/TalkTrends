@@ -1,4 +1,4 @@
-package model
+package com.example.talktrends.model
 
 import android.net.Uri
 

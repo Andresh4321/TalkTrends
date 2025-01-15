@@ -1,11 +1,11 @@
-package adapter
+package com.example.talktrends.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.talktrends.DashboardActivity
-import fragment.ForyouFragment
-import fragment.PopularFragment
-import fragment.RecentFragment
+import com.example.talktrends.UI.Activity.DashboardActivity
+import com.example.talktrends.UI.fragment.ForyouFragment
+import com.example.talktrends.UI.fragment.PopularFragment
+import com.example.talktrends.UI.fragment.RecentFragment
 
 class PostFragmentAdapter(activity: DashboardActivity) : FragmentStateAdapter(activity) {
 
