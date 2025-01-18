@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.app.HomeFragment"
+        android:label="Home">
+        <action
+            android:id="@+id/action_home_to_profile"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_home_to_notifications"
+            app:destination="@id/notificationsFragment" />
+    </fragment>
+
+    <!-- Profile Fragment -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.app.ProfileFragment"
+        android:label="Profile">
+        <action
+            android:id="@+id/action_profile_to_settings"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+
+    <!-- Notifications Fragment -->
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.example.app.NotificationsFragment"
+        android:label="Notifications" />
+
+    <!-- Settings Fragment -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.app.SettingsFragment"
+        android:label="Settings" />
+
+</navigation>
