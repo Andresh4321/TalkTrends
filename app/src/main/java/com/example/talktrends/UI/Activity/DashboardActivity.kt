@@ -27,7 +27,7 @@ class DashboardActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             // When CreateActivity finishes, update PopularFragment
             val popularFragment = supportFragmentManager.findFragmentByTag("popular") as? PopularFragment
-            popularFragment?.updatePosts()  // Method to update the fragment
+//            popularFragment?.updatePosts()  // Method to update the fragment
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
