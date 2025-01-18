@@ -9,6 +9,10 @@ interface UserRepository {
 
     fun signUp(email:String, password: String, callback:(Boolean,String,String)->Unit)
 
+    fun Selectgenre(genre:String,userId: String,callback: (Boolean, String) -> kotlin.Unit)
+
+    fun updateGenre(userId: String, genre: String, callback: (Boolean, String) -> Unit)
+
     fun addUserToDatabase(userId: String,userModel: UserModel,
                           callback: (Boolean, String) -> Unit)
 
