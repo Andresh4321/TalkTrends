@@ -9,7 +9,7 @@
     android:background="#FFFFFF"
     tools:context=".UI.Activity.CreateActivity">
 
-<!-- Top Section -->
+    <!-- Top Section -->
     <!-- Text Field and Spinner Section -->
     <LinearLayout
         android:layout_width="match_parent"

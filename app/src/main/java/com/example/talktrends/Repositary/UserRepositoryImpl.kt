@@ -44,9 +44,31 @@ class UserRepositoryImpl: UserRepository {
         }
     }
 
+    override fun Selectgenre(genre:String,userId: String,callback: (Boolean, String) -> kotlin.Unit){
+        ref.child(userId).child("genre").setValue(genre).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                callback(true, "Genre successfully saved")
+            } else {
+                callback(false, task.exception?.message.toString())
+            }
+        }
+    }
+
+
+
+    override fun updateGenre(userId: String, genre: String, callback: (Boolean, String) -> Unit) {
+        ref.child(userId).child("genre").setValue(genre).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                callback(true, "Genre updated successfully")
+            } else {
+                callback(false, task.exception?.message.toString())
+            }
+        }
+    }
+
     override fun addUserToDatabase(userId: String, userModel: UserModel,
                           callback: (Boolean, String) -> Unit){
-        ref.child(userId.toString()).setValue(userModel).addOnCompleteListener {
+        ref.child(userId).setValue(userModel).addOnCompleteListener {
             if (it.isSuccessful) {
                 callback(true, "Register success")
             } else {
@@ -67,6 +89,8 @@ class UserRepositoryImpl: UserRepository {
     }
 
     override fun getCurrentUser(): FirebaseUser? {
-        TODO("Not yet implemented")
+
+            return FirebaseAuth.getInstance().currentUser
+        }
+
     }
-}

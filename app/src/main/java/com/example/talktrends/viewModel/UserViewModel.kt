@@ -13,6 +13,14 @@ class UserViewModel(var repo:UserRepository) {
         repo.signUp(email,password,callback)
     }
 
+    fun selectGenre(genre: String, userId: String, callback: (Boolean, String) -> Unit) {
+        repo.Selectgenre(genre, userId, callback)
+    }
+
+    fun updateGenre(userId: String, genre: String, callback: (Boolean, String) -> Unit){
+        repo.updateGenre(userId,genre,callback)
+    }
+
     fun addUserToDatabase(userId: String, userModel: UserModel,
                           callback: (Boolean, String) -> Unit){
         repo.addUserToDatabase(userId, userModel, callback)
