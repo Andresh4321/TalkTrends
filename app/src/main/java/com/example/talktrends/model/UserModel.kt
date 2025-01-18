@@ -10,8 +10,11 @@ data class UserModel(
     var address:String="",
     var contact:String="",
     var email: String="",
+    var genre:String=""
+
 ):Parcelable{
     constructor(parcel: Parcel) : this(
+        parcel.readString()?:"",
         parcel.readString()?:"",
         parcel.readString()?:"",
         parcel.readString()?:"",
@@ -26,6 +29,7 @@ data class UserModel(
         parcel.writeString(address)
         parcel.writeString(contact)
         parcel.writeString(email)
+        parcel.writeString(genre)
     }
 
     override fun describeContents(): Int {
@@ -41,5 +45,4 @@ data class UserModel(
             return arrayOfNulls(size)
         }
     }
-
 }
