@@ -8,7 +8,7 @@
     android:background="@drawable/loginbackground"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".loginActivity">
+    tools:context=".UI.Activity.Login_Activity">
 
 
     <!--    <TextView-->
@@ -144,12 +144,13 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
+                    android:id="@+id/recover"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Forget Password?"
                     android:textAlignment="textEnd"
                     android:textColor="#616161"
-                    android:textSize="11sp"
+                    android:textSize="14dp"
                     android:textStyle="normal" />
             </LinearLayout>
 
