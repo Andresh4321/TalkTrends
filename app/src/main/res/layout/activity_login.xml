@@ -8,7 +8,7 @@
     android:background="@drawable/loginbackground"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".loginActivity">
+    tools:context=".UI.Activity.Login_Activity">
 
 
     <!--    <TextView-->
@@ -149,7 +149,7 @@
                     android:text="Forget Password?"
                     android:textAlignment="textEnd"
                     android:textColor="#616161"
-                    android:textSize="13sp"
+                    android:textSize="14dp"
                     android:textStyle="normal" />
             </LinearLayout>
 
