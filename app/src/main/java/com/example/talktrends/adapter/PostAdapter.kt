@@ -8,11 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.talktrends.R
 import com.example.talktrends.model.PostModel
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.widget.Button
 
 class PostAdapter(private val posts: List<PostModel>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
@@ -21,6 +21,8 @@ class PostAdapter(private val posts: List<PostModel>) : RecyclerView.Adapter<Pos
         val postText: TextView = itemView.findViewById(R.id.postText)
         val postImage: ImageView = itemView.findViewById(R.id.postImage)
     }
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_post, parent, false)
@@ -49,6 +51,10 @@ class PostAdapter(private val posts: List<PostModel>) : RecyclerView.Adapter<Pos
         } else {
             // Show a placeholder if the image string is empty or null
             holder.postImage.setImageResource(R.drawable.ic_launcher_foreground)
+        }
+        holder.itemView.findViewById<Button>(R.id.likeButton)?.apply {
+            setBackgroundResource(R.color.light_Red) // Ensure it's consistent
+            setTextColor(holder.itemView.context.resources.getColor(android.R.color.white, null))
         }
     }
 

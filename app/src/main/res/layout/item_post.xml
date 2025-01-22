@@ -40,10 +40,10 @@
 <ImageView
     android:id="@+id/postImage"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
     android:adjustViewBounds="true"
-    android:scaleType="centerCrop" />
+    android:scaleType="fitXY" />
 
 <LinearLayout
     android:layout_width="match_parent"
@@ -54,13 +54,12 @@
 
     <Button
         android:id="@+id/likeButton"
-        android:layout_width="0dp"
+        android:layout_width="196dp"
         android:layout_height="wrap_content"
-        android:background="@color/black"
-        android:layout_weight="1"
-        android:textSize="20dp"
-        android:text="Like" />
-
+        android:background="@color/light_Red"
+        android:textColor="@android:color/white"
+        android:text="Like"
+        android:textSize="20sp" />
     <Button
         android:id="@+id/commentButton"
         android:layout_width="0dp"
