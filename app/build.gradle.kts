@@ -38,6 +38,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    dependenciesInfo {
+        includeInBundle = true
+    }
 }
 
 dependencies {
@@ -53,5 +56,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.airbnb.android:lottie:6.6.2")
+    implementation ("com.github.bumptech.glide:glide:4.15.1")
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.15.1")
+    implementation ("de.hdodenhof:circleimageview:3.1.0" )
 
 }

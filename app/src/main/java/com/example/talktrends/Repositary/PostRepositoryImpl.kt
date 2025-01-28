@@ -47,21 +47,18 @@ class PostRepositoryImpl :PostRepository{
     }
 
     override fun getPostById(ProductId: String, callback: (PostModel?, Boolean, String) -> Unit) {
-
     }
 
-
-    // Retrieve all posts
-    override fun getAllPosts(callback: (List<PostModel>?, Boolean, String) -> Unit){
+    override fun getAllPosts(callback: (List<PostModel>?, Boolean, String) -> Unit) {
         ref.addValueEventListener(object:ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if(snapshot.exists()){
                     var post= mutableListOf<PostModel>()
                     for(eachData in snapshot.children){
                         var model=eachData.getValue(PostModel::class.java)
-                       if(model!=null){
-                           post.add(model)
-                       }
+                        if(model!=null){
+                            post.add(model)
+                        }
                     }
                     callback(post,true,"Post fetched successfully")
                 }
@@ -73,4 +70,19 @@ class PostRepositoryImpl :PostRepository{
 
         })
     }
+
+
+    override fun updateLikes(postId: String, newLikes: Int, callback: (Boolean, String) -> Unit) {
+        val dbRef = FirebaseDatabase.getInstance().getReference("Posts").child(postId)
+        dbRef.updateChildren(mapOf("like" to newLikes))
+            .addOnSuccessListener {
+                callback(true, "Likes updated successfully")
+            }
+            .addOnFailureListener {
+                callback(false, it.message ?: "Error updating likes")
+            }
+    }
 }
+
+
+

@@ -9,18 +9,17 @@
     android:background="#FFFFFF"
     tools:context=".UI.Activity.CreateActivity">
 
-    <!-- Top Section -->
-    <!-- Text Field and Spinner Section -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Text Label -->
+
         <EditText
-            android:layout_width="200dp"
-            android:id="@+id/edit_text"
+            android:id="@+id/editText"
+            android:layout_width="274dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@color/lavender"
@@ -30,18 +29,18 @@
             android:textSize="24dp"
             android:visibility="visible" />
 
-        <!-- Spinner -->
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="120dp"
+            android:layout_width="162dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_marginStart="8dp"
             android:background="@color/lavender"
             android:hint="Genres"
-
-            android:spinnerMode="dropdown"
             android:textColor="@color/black"
-            android:visibility="visible" />
+            android:visibility="visible"
+            />
+
     </LinearLayout>
 
     <ImageView
@@ -58,9 +57,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
 
-        <!-- Insert Image Button -->
 
-        <!-- Post Button -->
         <Button
             android:id="@+id/btn_insert_image"
             android:layout_width="0dp"
