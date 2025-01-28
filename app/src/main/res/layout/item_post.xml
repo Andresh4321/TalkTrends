@@ -4,18 +4,77 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="8dp">
-
-    <TextView
-        android:id="@+id/postText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black" />
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="4dp">
 
     <ImageView
-        android:id="@+id/postImage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        android:scaleType="centerCrop" />
+        android:id="@+id/avatarImageView"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/profile"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:id="@+id/usernameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:textColor="@android:color/black" />
 </LinearLayout>
+
+
+<TextView
+    android:id="@+id/postText"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="4dp"
+    android:textSize="14sp"
+    android:textColor="@android:color/black" />
+
+    <ImageView
+    android:id="@+id/postImage"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:adjustViewBounds="true"
+    android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/Like"
+        android:layout_width="103dp"
+
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center"
+    android:layout_marginTop="8dp">
+
+    <Button
+        android:id="@+id/likeButton"
+        android:layout_width="196dp"
+        android:layout_height="wrap_content"
+        android:background="@color/light_Red"
+        android:textColor="@android:color/white"
+        android:text="Like"
+        android:textSize="20sp" />
+    <Button
+        android:id="@+id/commentButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20dp"
+        android:background="@color/black"
+        android:text="Comment" />
+
+</LinearLayout>
+</LinearLayout>
+

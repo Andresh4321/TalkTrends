@@ -23,6 +23,7 @@ class RegistrationActivity : AppCompatActivity() {
     lateinit var binding: ActivityRegistrationBinding
     lateinit var UserViewModel:UserViewModel
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -61,12 +62,20 @@ class RegistrationActivity : AppCompatActivity() {
                             userId.toString(),
                             username,address,contact,email
                         )
-                        Toast.makeText(this, "Registered Successfully!", Toast.LENGTH_SHORT).show()
-
-                        val intent = Intent(this, CatActivity::class.java) // Change to RegistrationActivity if needed
-                        startActivity(intent)
+                        UserViewModel.addUserToDatabase(userId, userModel){
+                            success, message ->
+                            if(success){
+                                Toast.makeText(this@RegistrationActivity, message, Toast.LENGTH_SHORT).show()
+                               val intent=Intent(this@RegistrationActivity,CatActivity::class.java)
+                                startActivity(intent)
+                            }else{
+                                Toast.makeText(this@RegistrationActivity, message, Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this@RegistrationActivity, "Invalid details", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }else{
                         Toast.makeText(this@RegistrationActivity,message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@RegistrationActivity, "Invalid details", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

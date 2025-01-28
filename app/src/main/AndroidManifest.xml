@@ -10,6 +10,7 @@
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="true"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,13 +19,15 @@
         android:theme="@style/Theme.TalkTrends"
         tools:targetApi="31">
         <activity
-            android:name=".UI.Activity.Login_Activity"
+            android:name=".UI.Activity.EditProfileActivity"
             android:exported="false" />
-
         <activity
             android:name=".UI.Activity.CreateActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Dialog" />
+        <activity
+            android:name=".UI.Activity.Login_Activity"
+            android:exported="false" />
         <activity
             android:name=".UI.Activity.CatActivity"
             android:exported="true">
@@ -36,13 +39,13 @@
         </activity>
         <activity
             android:name=".UI.Activity.RecoverActivity"
-            android:exported="true" >
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".UI.Activity.StartActivity"
             android:exported="true">
@@ -66,6 +69,21 @@
         </activity>
         <activity
             android:name=".UI.Activity.RegistrationActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".nav_graph"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".loginActivity"
             android:exported="false" />
     </application>
 
