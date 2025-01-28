@@ -5,56 +5,57 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.talktrends.R
+import com.example.talktrends.Repositary.PostRepositoryImpl
+import com.example.talktrends.adapters.PostAdapter
+import com.example.talktrends.viewModel.PostViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RecentFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RecentFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: PostAdapter
+    private lateinit var postViewModel: PostViewModel
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_recent, container, false)
-    }
+        val view = inflater.inflate(R.layout.fragment_recent, container, false)
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecentFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecentFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        // Initialize RecyclerView
+        recyclerView = view.findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+
+        postViewModel = PostViewModel(PostRepositoryImpl())
+
+        // Fetch and display posts
+        postViewModel.getAllPosts { posts, success, message ->
+            if (success && posts != null) {
+                // Sort the posts by timestamp in descending order (newest first)
+                val sortedPosts = posts.sortedByDescending { it.timestamp }
+
+                // Initialize the adapter with a callback for updating likes
+                adapter = PostAdapter(sortedPosts) { post ->
+                    // Update the likes in the database
+                    postViewModel.updateLikes(post.postId, post.like) { success, updateMessage ->
+                        if (success) {
+                            Toast.makeText(context, "Like updated!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(context, "Failed to update like: $updateMessage", Toast.LENGTH_SHORT).show()
+                        }
+                    }
                 }
+
+                recyclerView.adapter = adapter
+            } else {
+                // Handle error
+                Toast.makeText(context, "Failed to load posts: $message", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        return view
     }
 }

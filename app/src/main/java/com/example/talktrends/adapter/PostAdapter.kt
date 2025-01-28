@@ -14,12 +14,14 @@ import android.graphics.BitmapFactory
 import android.util.Base64
 import android.widget.Button
 
-class PostAdapter(private val posts: List<PostModel>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
+class PostAdapter(private val posts: List<PostModel>, private val onLikeClicked: (PostModel) -> Unit): RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
     // ViewHolder class to bind the views
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val postText: TextView = itemView.findViewById(R.id.postText)
         val postImage: ImageView = itemView.findViewById(R.id.postImage)
+        val likeCount: TextView = itemView.findViewById(R.id.Like)
+        val likeButton: Button = itemView.findViewById(R.id.likeButton)
     }
 
 
@@ -29,6 +31,9 @@ class PostAdapter(private val posts: List<PostModel>) : RecyclerView.Adapter<Pos
         return PostViewHolder(view)
     }
 
+    override fun getItemCount(): Int {
+        return posts.size
+    }
 
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -52,14 +57,23 @@ class PostAdapter(private val posts: List<PostModel>) : RecyclerView.Adapter<Pos
             // Show a placeholder if the image string is empty or null
             holder.postImage.setImageResource(R.drawable.ic_launcher_foreground)
         }
-        holder.itemView.findViewById<Button>(R.id.likeButton)?.apply {
-            setBackgroundResource(R.color.light_Red) // Ensure it's consistent
-            setTextColor(holder.itemView.context.resources.getColor(android.R.color.white, null))
+        // Set the like count
+        holder.likeCount.text = "Likes: ${post.like}"
+
+        // Handle the like button click
+        holder.likeButton.setOnClickListener {
+            // Increment the like count locally
+            post.like += 1
+            // Update the UI
+            holder.likeCount.text = "Likes: ${post.like}"
+
+            // Trigger the callback to update the database
+            onLikeClicked(post)
         }
+
+
+    }
     }
 
 
-    override fun getItemCount(): Int {
-        return posts.size
-    }
-}
+

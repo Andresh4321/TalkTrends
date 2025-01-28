@@ -82,7 +82,7 @@ class CreateActivity : AppCompatActivity() {
                 val bitmap = uriToBitmap(image, this)
                 val base64Image = encodeImageToBase64(bitmap)
 
-                var model = PostModel("",text, image = base64Image)
+                var model = PostModel("",text,base64Image)
 
                 PostViewModel.addPost(model) { success, message ->
                     if (success) {

@@ -30,15 +30,29 @@ class PopularFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
 
-        postViewModel = PostViewModel(PostRepositoryImpl()) // Make sure to use the correct repository
+        postViewModel = PostViewModel(PostRepositoryImpl())
 
-        // Observe posts data
+        // Fetch and display posts
         postViewModel.getAllPosts { posts, success, message ->
-            if (success && posts!=null) {
-                adapter=PostAdapter(posts)
-                recyclerView.adapter=adapter
+            if (success && posts != null) {
+                // Sort the posts by likes in descending order
+                val sortedPosts = posts.sortedByDescending { it.like }
+
+                // Initialize the adapter with a callback for updating likes
+                adapter = PostAdapter(sortedPosts) { post ->
+                    // Update the likes in the database
+                    postViewModel.updateLikes(post.postId, post.like) { success, updateMessage ->
+                        if (success) {
+                            Toast.makeText(context, "Like updated!", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(context, "Failed to update like: $updateMessage", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                recyclerView.adapter = adapter
             } else {
-                // Handle the error case, show a Toast or similar
+                // Handle error
                 Toast.makeText(context, "Failed to load posts: $message", Toast.LENGTH_SHORT).show()
             }
         }

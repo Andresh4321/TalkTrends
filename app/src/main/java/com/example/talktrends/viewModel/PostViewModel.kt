@@ -14,6 +14,10 @@ class PostViewModel(var repo:PostRepository) {
         repo.deletePost(PostId,callback)
     }
 
+    fun updateLikes(postId: String, newLikes: Int, callback: (Boolean, String) -> Unit) {
+        repo.updateLikes(postId, newLikes, callback)
+    }
+
     fun getPostById(PostId: String,callback: (PostModel?,Boolean, String) -> Unit){}
 
 
