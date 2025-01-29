@@ -123,6 +123,42 @@
 
     </LinearLayout>
 
+
+
+    <!-- Edit Profile Section -->
+    <LinearLayout
+        android:id="@+id/edit_cat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="8dp"
+        android:background="@color/white"
+        android:layout_marginTop="8dp"
+        android:elevation="2dp">
+
+        <ImageView
+            android:id="@+id/editcat"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/profile"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/edit_image"
+            android:layout_marginEnd="16dp"
+            android:shape="oval" />
+
+        <TextView
+            android:id="@+id/edit_gnere"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change favorite genre"
+            android:layout_gravity="center_vertical"
+            android:textSize="24sp"
+            android:textColor="@color/black"
+            android:fontFamily="sans-serif-medium" />
+
+    </LinearLayout>
+
     <!-- Log Out Section -->
     <LinearLayout
 
