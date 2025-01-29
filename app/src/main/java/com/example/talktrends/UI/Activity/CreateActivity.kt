@@ -74,15 +74,33 @@ class CreateActivity : AppCompatActivity() {
 
 
 
+        spinner = findViewById(R.id.spinner)
+
+// Define the categories for the spinner
+        val categories = arrayOf("Sci-Fi", "Mystery", "Fantasy", "Comedy", "Science")
+
+// Create an ArrayAdapter for the spinner
+        val adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_item, // Layout for spinner items
+            categories
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+// Set the adapter to the spinner
+        spinner.adapter = adapter
+
+
         binding.btnPost.setOnClickListener {
             var text = binding.editText.text.toString()
             var image = selectedImageUri
+            val genre = spinner.selectedItem?.toString() ?: ""
 
             if (image != null) {
                 val bitmap = uriToBitmap(image, this)
                 val base64Image = encodeImageToBase64(bitmap)
 
-                var model = PostModel("",text,base64Image)
+                var model = PostModel("",text,base64Image,genre)
 
                 PostViewModel.addPost(model) { success, message ->
                     if (success) {
@@ -108,17 +126,6 @@ class CreateActivity : AppCompatActivity() {
                 finish()
             }
 
-
-            val categories = arrayOf("Sci-Fi", "Science", "History")
-            spinner = findViewById(R.id.spinner)
-
-            val autoAdapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                categories
-            )
-            autoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = autoAdapter
 
             // Adjust the dialog size
             window?.setLayout(
