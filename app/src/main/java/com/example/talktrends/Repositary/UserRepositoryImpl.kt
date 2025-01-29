@@ -66,6 +66,20 @@ class UserRepositoryImpl: UserRepository {
         }
     }
 
+    override fun addProfile(
+        userId: String,
+        UserModel: UserModel,
+        callback: (Boolean, String) -> Unit
+    ) {
+        ref.child(userId).child("users").setValue(UserModel).addOnCompleteListener(){
+            if (it.isSuccessful){
+                callback(true,"Success")
+            }else{
+                callback(false,it.exception?.message.toString())
+            }
+        }
+    }
+
     override fun addUserToDatabase(userId: String, userModel: UserModel,
                           callback: (Boolean, String) -> Unit){
         ref.child(userId).setValue(userModel).addOnCompleteListener {
@@ -87,6 +101,21 @@ class UserRepositoryImpl: UserRepository {
             }
         }
     }
+
+    override fun getSelectedGenre(
+        userId: String,
+        callback: (String?, Boolean, String?) -> Unit
+    ) {
+        ref.child(userId).child("genre").get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val genre = task.result?.getValue(String::class.java) // Retrieve the genre as a String
+                callback(genre, true, null) // Pass the genre and success status to the callback
+            } else {
+                callback(null, false, task.exception?.message) // Pass the error message in case of failure
+            }
+        }
+    }
+
 
     override fun getCurrentUser(): FirebaseUser? {
 
