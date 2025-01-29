@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -20,23 +21,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/coverImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/editCoverButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@drawable/circular_button_bg"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_camera"
-                    app:layout_constraintBottom_toBottomOf="@id/coverImage"
-                    app:layout_constraintEnd_toEndOf="@id/coverImage" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -55,9 +41,12 @@
             android:orientation="vertical">
 
             <!-- Profile Info Section -->
+
+            <!-- Stats Section -->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="326dp"
                 android:paddingBottom="16dp">
 
                 <!-- Profile Picture -->
@@ -66,22 +55,13 @@
                     android:layout_width="150dp"
                     android:layout_height="150dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="-75dp"
-                    android:src="@drawable/default_profile"
+                    android:layout_marginTop="16dp"
+                    android:src="@drawable/profile"
                     app:civ_border_color="#FFFFFF"
                     app:civ_border_width="4dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageButton
-                    android:id="@+id/editProfilePicButton"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@drawable/circular_button_bg"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_camera"
-                    app:layout_constraintBottom_toBottomOf="@id/profileImage"
-                    app:layout_constraintEnd_toEndOf="@id/profileImage" />
 
                 <!-- Name and Info -->
                 <TextView
@@ -90,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="Rohan Yadav"
+
                     android:textSize="24sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,8 +82,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="4dp"
-                    android:text="Lives in New York City | Works at Tech Company"
-                    app:layout_constraintTop_toBottomOf="@id/userName" />
+                    android:textSize="16dp"
+                    android:hint="Write about yourself"
+                    app:layout_constraintTop_toBottomOf="@id/userName"
+                    tools:layout_editor_absoluteX="16dp" />
 
                 <!-- Action Buttons -->
                 <LinearLayout
@@ -111,9 +93,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:orientation="horizontal"
-                    app:layout_constraintTop_toBottomOf="@id/userBio">
+                    app:layout_constraintTop_toBottomOf="@id/userBio"
+                    tools:layout_editor_absoluteX="16dp">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/editProfileButton"
@@ -121,6 +104,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
+
                         android:text="Edit Profile" />
 
                     <com.google.android.material.button.MaterialButton
@@ -131,13 +115,12 @@
                         android:layout_weight="1"
                         android:text="Add Story"
                         android:textColor="@android:color/white"
-                        app:backgroundTint="@color/blue" />
+                        app:backgroundTint="@color/black" />
 
                 </LinearLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Stats Section -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,10 +204,11 @@
             </com.google.android.material.card.MaterialCardView>
 
             <!-- Tabs and ViewPager -->
+
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="250dp"
                 app:tabMode="fixed" />
 
             <androidx.viewpager2.widget.ViewPager2
