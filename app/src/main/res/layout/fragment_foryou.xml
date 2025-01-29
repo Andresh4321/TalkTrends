@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:clipToPadding="false"
     android:scrollbars="vertical"
+    android:id="@+id/recyclerView"
     tools:context=".UI.fragment.ForyouFragment">
 
 </androidx.recyclerview.widget.RecyclerView>
