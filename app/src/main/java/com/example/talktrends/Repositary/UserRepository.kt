@@ -1,5 +1,8 @@
 package com.example.talktrends.Repositary
 
+import android.content.Context
+import android.net.Uri
+import com.example.talktrends.model.PostModel
 import com.example.talktrends.model.UserModel
 import com.google.firebase.auth.FirebaseUser
 
@@ -13,10 +16,24 @@ interface UserRepository {
 
     fun updateGenre(userId: String, genre: String, callback: (Boolean, String) -> Unit)
 
+    fun addProfile(userId: String,UserModel: UserModel, callback: (Boolean, String) -> Unit)
+
     fun addUserToDatabase(userId: String,userModel: UserModel,
                           callback: (Boolean, String) -> Unit)
 
+     fun getUserProfile(userId: String, callback: (UserModel?, Boolean, String) -> Unit)
+
+
+
+    fun uploadImage(context: Context, imageUri: Uri, callback: (String?) -> Unit)
+
+    fun getFileNameFromUri(context: Context, uri: Uri): String?
+
+
+
     fun forgetPassword(username:String,email: String,callback: (Boolean, String) -> Unit)
+
+    fun getSelectedGenre(userId: String,callback: (String?, Boolean, String?) -> Unit)
 
 
     fun getCurrentUser(): FirebaseUser?
