@@ -9,7 +9,7 @@ data class UserModel(
     var username:String="",
     var address:String="",
     var contact:String="",
-    var profile: String? =null,
+    var profile: String? ="",
     var email: String="",
     var genre:String="",
     var about:String=""

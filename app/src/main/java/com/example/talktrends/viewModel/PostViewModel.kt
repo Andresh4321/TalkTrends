@@ -1,5 +1,7 @@
 package com.example.talktrends.viewModel
 
+import android.content.Context
+import android.net.Uri
 import com.example.talktrends.Repositary.PostRepository
 import com.example.talktrends.model.PostModel
 
@@ -25,4 +27,6 @@ class PostViewModel(var repo:PostRepository) {
         repo.getAllPosts(callback)
 
     }
+
+
 }

@@ -1,11 +1,20 @@
 package com.example.talktrends.viewModel
 
+import android.content.Context
+import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.talktrends.Repositary.UserRepository
 import com.example.talktrends.model.PostModel
 import com.example.talktrends.model.UserModel
 import com.google.firebase.auth.FirebaseUser
 
-class UserViewModel(var repo:UserRepository) {
+class UserViewModel(var repo:UserRepository): ViewModel() {
+
+    private val _userProfile = MutableLiveData<UserModel?>()
+    val userProfile: LiveData<UserModel?> get() = _userProfile
+
     fun login(email:String,password:String,callback: (Boolean, String) -> Unit){
         repo.login(email,password,callback)
     }
@@ -30,6 +39,12 @@ class UserViewModel(var repo:UserRepository) {
         repo.addProfile(userId,UserModel,callback)
     }
 
+    fun getUserProfile(userId: String) {
+        repo.getUserProfile(userId) { user, success, _ ->
+            _userProfile.postValue(if (success) user else null)
+        }
+    }
+
     fun forgetPassword(username:String,email: String,callback: (Boolean, String) -> Unit){
         repo.forgetPassword(username,email,callback)
     }
@@ -39,5 +54,9 @@ class UserViewModel(var repo:UserRepository) {
     }
     fun getCurrentUser(): FirebaseUser?{
         return repo.getCurrentUser()
+    }
+
+    fun uploadImage(context: Context, imageUri: Uri, callback: (String?) -> Unit){
+        repo.uploadImage(context, imageUri, callback)
     }
 }
