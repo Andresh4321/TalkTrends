@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import com.example.talktrends.R
+import com.example.talktrends.UI.Activity.CatActivity
 import com.example.talktrends.UI.Activity.DashboardActivity
 import com.example.talktrends.UI.Activity.EditProfileActivity
 import com.example.talktrends.UI.Activity.Login_Activity
@@ -32,6 +33,7 @@ class SettingFragment : Fragment() {
         val logoutLayout: LinearLayout = view.findViewById(R.id.logout_section)
         val friendsLayout: LinearLayout = view.findViewById(R.id.friends_section)
         val editLayout:LinearLayout=view.findViewById(R.id.Edit_Profile)
+        val editgenreLayout:LinearLayout=view.findViewById(R.id.edit_cat)
 
         // Handle click for Profile section
         profileLayout.setOnClickListener {
@@ -54,7 +56,10 @@ class SettingFragment : Fragment() {
             val intent = Intent(requireContext(), EditProfileActivity::class.java)
             startActivity(intent)
         }
-
+        editgenreLayout.setOnClickListener{
+            val intent=Intent(requireContext(),CatActivity::class.java)
+            startActivity(intent)
+        }
         // Handle click for Logout section
         logoutLayout.setOnClickListener {
             // Clear user session or Firebase authentication if applicable

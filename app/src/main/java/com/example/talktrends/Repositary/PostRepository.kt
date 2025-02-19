@@ -14,6 +14,7 @@ interface PostRepository {
 
     fun getPostById(PostId: String,callback: (PostModel?,Boolean, String) -> Unit)
 
+    fun getPostsByUser (userId: String, callback: (List<PostModel>?, Boolean, String) -> Unit)
 
     fun getAllPosts(callback: (List<PostModel>?, Boolean, String) -> Unit)
 }

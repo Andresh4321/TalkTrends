@@ -27,126 +27,167 @@ import com.example.talktrends.model.UserModel
 import com.example.talktrends.viewModel.PostViewModel
 import com.example.talktrends.viewModel.UserViewModel
 import java.io.ByteArrayOutputStream
+import android.util.Base64
 
 class CreateActivity : AppCompatActivity() {
 
-    lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
-    lateinit var imageView: ImageView
-    var selectedImageUri: Uri? = null
-    lateinit var spinner: Spinner
-    lateinit var binding:ActivityCreateBinding
-    lateinit var PostViewModel:PostViewModel
-
-
-
+    private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
+    private lateinit var imageView: ImageView
+    private lateinit var spinner: Spinner
+    private lateinit var binding: ActivityCreateBinding
+    private lateinit var postViewModel: PostViewModel
+    private lateinit var userViewModel: UserViewModel
+    private var selectedImageUri: Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityCreateBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        var repo = PostRepositoryImpl()
-        PostViewModel = PostViewModel(repo)
+        initializeViews()
+        setupViewModels()
+        setupImagePicker()
+        setupSpinner()
+        checkUserAuthentication()
+    }
 
-        // Initialize the ImageView
+    private fun initializeViews() {
         imageView = findViewById(R.id.image_view)
+        spinner = findViewById(R.id.spinner)
 
-        // Set up the Image Picker launcher
-        imagePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val imageUri: Uri? = result.data?.data
-                imageUri?.let {
-                    // Display the selected image in the ImageView
-                    imageView.setImageURI(it)
-                    // Store the selected URI for future use (posting)
-                    selectedImageUri = it
-                }
-            }
-        }
-
-        // Insert Image Button Click
-        val btnInsertImage: Button = findViewById(R.id.btn_insert_image)
-        btnInsertImage.setOnClickListener {
-            openImagePicker() // Trigger the image picker
-        }
-
-
-
-        binding.btnPost.setOnClickListener {
-            var text = binding.editText.text.toString()
-            var image = selectedImageUri
-
-            if (image != null) {
-                val bitmap = uriToBitmap(image, this)
-                val base64Image = encodeImageToBase64(bitmap)
-
-                var model = PostModel("",text,base64Image)
-
-                PostViewModel.addPost(model) { success, message ->
-                    if (success) {
-                        Toast.makeText(this@CreateActivity, "message", Toast.LENGTH_SHORT).show()
-                        Toast.makeText(this@CreateActivity, "Post Posted", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@CreateActivity, DashboardActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this@CreateActivity, "message", Toast.LENGTH_SHORT).show()
-                    }
-
-                }
-                // Hide the keyboard before posting
-                val inputMethodManager =
-                    getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
-
-
-                val resultIntent = Intent()
-                setResult(RESULT_OK, resultIntent)
-
-                // Return to the dashboard
-                finish()
-            }
-
-
-            val categories = arrayOf("Sci-Fi", "Science", "History")
-            spinner = findViewById(R.id.spinner)
-
-            val autoAdapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                categories
-            )
-            autoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            spinner.adapter = autoAdapter
-
-            // Adjust the dialog size
-            window?.setLayout(
-                (resources.displayMetrics.widthPixels * 0.9).toInt(),
-                WindowManager.LayoutParams.WRAP_CONTENT
-            )
-
-
+        binding.btnInsertImage.setOnClickListener {
+            openImagePicker()
         }
     }
+
+    private fun setupViewModels() {
+        val postRepo = PostRepositoryImpl()
+        val userRepo = UserRepositoryImpl()
+        postViewModel = PostViewModel(postRepo)
+        userViewModel = UserViewModel(userRepo)
+    }
+
+    private fun checkUserAuthentication() {
+        val currentUser = userViewModel.getCurrentUser()
+        currentUser?.uid?.let { userId ->
+            userViewModel.getUserProfile(userId)
+            userViewModel.userProfile.observe(this) { user ->
+                user?.let { setupPostCreation(it) } ?: showUserDataError()
+            }
+        } ?: showLoginError()
+    }
+
+    private fun setupPostCreation(user: UserModel) {
+        binding.btnPost.setOnClickListener {
+            val text = binding.editText.text.toString().trim()
+            val genre = spinner.selectedItem?.toString() ?: ""
+
+            if (text.isBlank()) {
+                showToast("Please enter text")
+                return@setOnClickListener
+            }
+
+            val base64Image = selectedImageUri?.let { uri ->
+                try {
+                    val bitmap = uriToBitmap(uri, this)
+                    encodeImageToBase64(bitmap)
+                } catch (e: Exception) {
+                    showToast("Error processing image")
+                    null
+                }
+            }
+
+            createPost(user, text, genre, base64Image)
+        }
+    }
+
+    private fun createPost(user: UserModel, text: String, genre: String, image: String?) {
+        val post = PostModel(
+            userId = user.userId,
+            username = user.username,
+            profileimage = user.profile,
+            text = text,
+            image = image,
+            genre = genre,
+            like = 0
+        )
+
+        postViewModel.addPost(post) { success, message ->
+            if (success) {
+                handlePostSuccess()
+            } else {
+                handlePostError(message)
+            }
+        }
+    }
+
+    private fun handlePostSuccess() {
+        hideKeyboard()
+        showToast("Post created successfully!")
+        finish()
+    }
+
+    private fun handlePostError(message: String?) {
+        showToast("Error: ${message ?: "Unknown error"}")
+    }
+
+    private fun setupImagePicker() {
+        imagePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                result.data?.data?.let { uri ->
+                    selectedImageUri = uri
+                    imageView.setImageURI(uri)
+                }
+            }
+        }
+    }
+
+    private fun setupSpinner() {
+        val categories = arrayOf("Sci-Fi", "Mystery", "Fantasy", "Comedy", "Science")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories).apply {
+            setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+        spinner.adapter = adapter
+    }
+
     private fun openImagePicker() {
         val intent = Intent(Intent.ACTION_PICK).apply {
             type = "image/*"
         }
         imagePickerLauncher.launch(intent)
     }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(currentFocus?.windowToken, 0)
+    }
+
+    private fun showToast(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun showLoginError() {
+        showToast("User not logged in")
+        finish()
+    }
+
+    private fun showUserDataError() {
+        showToast("User data not found")
+        finish()
+    }
 }
 
+// Extension functions outside class
 private fun uriToBitmap(uri: Uri, context: Context): Bitmap {
     return context.contentResolver.openInputStream(uri).use { inputStream ->
         BitmapFactory.decodeStream(inputStream) ?: throw IllegalArgumentException("Cannot decode bitmap")
     }
 }
 
-fun encodeImageToBase64(bitmap: Bitmap): String {
-    val outputStream = ByteArrayOutputStream()
-    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
-    val byteArray = outputStream.toByteArray()
-    return android.util.Base64.encodeToString(byteArray, android.util.Base64.DEFAULT)
+private fun encodeImageToBase64(bitmap: Bitmap): String {
+    return ByteArrayOutputStream().use { outputStream ->
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+        Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT)
+    }
 }
-

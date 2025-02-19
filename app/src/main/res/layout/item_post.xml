@@ -1,7 +1,7 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="8dp">
 <LinearLayout
@@ -11,11 +11,10 @@
     android:paddingBottom="4dp">
 
     <ImageView
-        android:id="@+id/avatarImageView"
+        android:id="@+id/ProfileImageView"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/profile"
         android:scaleType="centerCrop"
         />
 
@@ -62,7 +61,7 @@
         android:id="@+id/likeButton"
         android:layout_width="196dp"
         android:layout_height="wrap_content"
-        android:background="@color/light_Red"
+        app:backgroundTint="@color/black"
         android:textColor="@android:color/white"
         android:text="Like"
         android:textSize="20sp" />
@@ -72,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="20dp"
-        android:background="@color/black"
+        app:backgroundTint="@color/black"
         android:text="Comment" />
 
 </LinearLayout>
