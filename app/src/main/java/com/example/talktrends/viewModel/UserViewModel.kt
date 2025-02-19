@@ -9,6 +9,7 @@ import com.example.talktrends.Repositary.UserRepository
 import com.example.talktrends.model.PostModel
 import com.example.talktrends.model.UserModel
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.userProfileChangeRequest
 
 class UserViewModel(var repo:UserRepository): ViewModel() {
 
@@ -39,11 +40,7 @@ class UserViewModel(var repo:UserRepository): ViewModel() {
         repo.addProfile(userId,UserModel,callback)
     }
 
-    fun getUserProfile(userId: String) {
-        repo.getUserProfile(userId) { user, success, _ ->
-            _userProfile.postValue(if (success) user else null)
-        }
-    }
+
 
     fun forgetPassword(username:String,email: String,callback: (Boolean, String) -> Unit){
         repo.forgetPassword(username,email,callback)
@@ -52,8 +49,26 @@ class UserViewModel(var repo:UserRepository): ViewModel() {
     fun getSelectedGenre(userId: String, callback: (String?, Boolean, String?) -> Unit){
         repo.getSelectedGenre(userId,callback)
     }
+
+
+    fun getUserProfile(userId: String) {
+        repo.getUserProfile(userId) { user, success, _ ->
+            _userProfile.postValue(if (success) user else null)
+        }
+    }
+
+    fun getUser(userId: String, callback: (UserModel?, Boolean, String) -> Unit){
+        repo.getUser(userId,callback)
+    }
+
+
+
     fun getCurrentUser(): FirebaseUser?{
         return repo.getCurrentUser()
+    }
+
+    fun updateProfile(username:String, contact:String,profileImage: String?, about: String, userId: String, callback: (Boolean, String) -> Unit) {
+        repo.updateProfile(userId,username,contact, profileImage, about, callback) // ✅ Correct order
     }
 
     fun uploadImage(context: Context, imageUri: Uri, callback: (String?) -> Unit){
