@@ -47,6 +47,31 @@ class PostRepositoryImpl :PostRepository{
     }
 
     override fun getPostById(ProductId: String, callback: (PostModel?, Boolean, String) -> Unit) {
+
+
+    }
+
+    override fun getPostsByUser (userId: String, callback: (List<PostModel>?, Boolean, String) -> Unit) {
+        ref.orderByChild("userId").equalTo(userId).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val posts = mutableListOf<PostModel>()
+                    for (eachData in snapshot.children) {
+                        val model = eachData.getValue(PostModel::class.java)
+                        if (model != null) {
+                            posts.add(model)
+                        }
+                    }
+                    callback(posts, true, "Posts fetched successfully")
+                } else {
+                    callback(emptyList(), true, "No posts found")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback(null, false, "Error fetching posts: ${error.message}")
+            }
+        })
     }
 
     override fun getAllPosts(callback: (List<PostModel>?, Boolean, String) -> Unit) {
