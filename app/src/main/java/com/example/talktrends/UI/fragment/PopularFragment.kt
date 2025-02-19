@@ -12,6 +12,8 @@ import com.example.talktrends.R
 import com.example.talktrends.Repositary.PostRepository
 import com.example.talktrends.Repositary.PostRepositoryImpl
 import com.example.talktrends.adapters.PostAdapter
+import androidx.lifecycle.ViewModelProvider
+
 import com.example.talktrends.model.PostModel
 import com.example.talktrends.viewModel.PostViewModel
 

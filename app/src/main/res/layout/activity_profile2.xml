@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".UI.Activity.ProfileActivity">
 
     <!-- App Bar Layout -->
     <com.google.android.material.appbar.AppBarLayout
@@ -56,7 +57,6 @@
                     android:layout_height="150dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:src="@drawable/profile"
                     app:civ_border_color="#FFFFFF"
                     app:civ_border_width="4dp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -99,21 +99,21 @@
                     tools:layout_editor_absoluteX="16dp">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/editProfileButton"
+                        android:id="@+id/back"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:layout_weight="1"
-
-                        android:text="Edit Profile" />
+                        app:backgroundTint="@color/black"
+                        android:text="Back" />
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/addStoryButton"
+                        android:id="@+id/follow"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Add Story"
+                        android:text="Follow"
                         android:textColor="@android:color/white"
                         app:backgroundTint="@color/black" />
 
@@ -203,15 +203,8 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Tabs and ViewPager -->
 
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabLayout"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                app:tabMode="fixed" />
-
-            <androidx.viewpager2.widget.ViewPager2
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/viewPager"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
