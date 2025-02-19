@@ -22,6 +22,9 @@ class PostViewModel(var repo:PostRepository) {
 
     fun getPostById(PostId: String,callback: (PostModel?,Boolean, String) -> Unit){}
 
+    fun getPostsByUser (userId: String, callback: (List<PostModel>?, Boolean, String) -> Unit) {
+        repo.getPostsByUser (userId, callback)
+    }
 
     fun getAllPosts(callback: (List<PostModel>?, Boolean, String) -> Unit){
         repo.getAllPosts(callback)
