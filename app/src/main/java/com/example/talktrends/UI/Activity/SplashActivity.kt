@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.talktrends.R
 
-class StartActivity : AppCompatActivity() {
+class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -22,9 +22,9 @@ class StartActivity : AppCompatActivity() {
         }
         // Delay for 2 seconds and navigate to LoginActivity
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@StartActivity, Login_Activity::class.java)
+            val intent = Intent(this@SplashActivity, Login_Activity::class.java)
             startActivity(intent)
             finish() // Finish SplashActivity to prevent back navigation to it
         }, 4000)
-        }
     }
+}
