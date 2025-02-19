@@ -14,6 +14,11 @@ interface UserRepository {
 
     fun Selectgenre(genre:String,userId: String,callback: (Boolean, String) -> kotlin.Unit)
 
+
+    fun updateProfile(userId: String, username:String, contact:String,profileImage: String?, about: String, callback: (Boolean, String) -> Unit)
+
+    fun getProfile(userId: String, callback: (UserModel?, Boolean, String) -> Unit)
+
     fun updateGenre(userId: String, genre: String, callback: (Boolean, String) -> Unit)
 
     fun addProfile(userId: String,UserModel: UserModel, callback: (Boolean, String) -> Unit)
@@ -29,7 +34,7 @@ interface UserRepository {
 
     fun getFileNameFromUri(context: Context, uri: Uri): String?
 
-
+    fun getUser(userId: String, callback: (UserModel?, Boolean, String) -> Unit)
 
     fun forgetPassword(username:String,email: String,callback: (Boolean, String) -> Unit)
 
