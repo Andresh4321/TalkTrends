@@ -69,31 +69,35 @@ class EditProfileActivity : AppCompatActivity() {
         }
 
 
-        binding.btnSave.setOnClickListener{
-            var text = binding.aboutEditText.text.toString().trim()
-            var image=selectedImageUri
+        binding.btnSave.setOnClickListener {
+            val about = binding.aboutEditText.text.toString().trim()
+            val image = selectedImageUri
+            val name=binding.nameEditText.text.toString().trim()
+            val contant=binding.numberEditText.toString().trim()
 
-            if (image != null) {
-                val bitmap = uriToBitmap(image, this)
-                val base64Image = ImageProfile(bitmap)
 
-                val model = UserModel(
-                    about = text,   // Updating only 'about' field
-                    profile = base64Image  // Updating only 'profile' field
-                )
-                userViewModel.addProfile(userId,model) { success, message ->
-                    if (success) {
-                        Toast.makeText(this@EditProfileActivity, "message", Toast.LENGTH_SHORT).show()
-                        Toast.makeText(this@EditProfileActivity, "Post Posted", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this@EditProfileActivity, DashboardActivity::class.java)
-                        startActivity(intent)
-                    } else {
-                        Toast.makeText(this@EditProfileActivity, "message", Toast.LENGTH_SHORT).show()
-                    }
-                }
+            // Convert image to Base64 if exists
+            val base64Image = image?.let { uri ->
+                val bitmap = uriToBitmap(uri, this)
+                ImageProfile(bitmap) // Your existing conversion function
             }
 
+            userViewModel.updateProfile(
+                profileImage = base64Image,
+                username=name,
+                contact=contant,
+                about = about,
+                userId = userId
+            ) { success, message ->
+                if (success) {
+                    Toast.makeText(this, "Profile updated!", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this,DashboardActivity::class.java))
+                } else {
+                    Toast.makeText(this, "Error: $message", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
+
 
 
 
