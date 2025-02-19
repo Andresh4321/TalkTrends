@@ -67,6 +67,29 @@ class UserRepositoryImpl: UserRepository {
             }
         }
     }
+    override fun updateProfile(userId: String,username:String, contact:String, profileImage: String?, about: String, callback: (Boolean, String) -> Unit) {
+        val updates = hashMapOf<String, Any>(
+            "username" to username,
+            "contact" to contact,
+            "about" to about
+        )
+
+        // Only update profile if new image exists
+        profileImage?.let {
+            updates["profile"] = it
+        }
+
+        ref.child(userId).updateChildren(updates) // ✅ Update specific fields
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    callback(true, "Profile updated successfully")
+                } else {
+                    callback(false, task.exception?.message ?: "Unknown error")
+                }
+            }
+    }
+
+
 
 
 
@@ -133,6 +156,21 @@ class UserRepositoryImpl: UserRepository {
         }
     }
 
+
+    // Should be in UserRepositoryImpl, not PostRepository
+    override fun getProfile(userId: String, callback: (UserModel?, Boolean, String) -> Unit) {
+        FirebaseDatabase.getInstance().getReference("users").child(userId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val user = snapshot.getValue(UserModel::class.java)
+                    callback(user, true, "Success")
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    callback(null, false, error.message)
+                }
+            })
+    }
     override fun getSelectedGenre(
         userId: String,
         callback: (String?, Boolean, String?) -> Unit
@@ -145,6 +183,23 @@ class UserRepositoryImpl: UserRepository {
                 callback(null, false, task.exception?.message) // Pass the error message in case of failure
             }
         }
+    }
+
+    override fun getUser (userId: String, callback: (UserModel?, Boolean, String) -> Unit) {
+        ref.child(userId).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()) {
+                    val user = snapshot.getValue(UserModel::class.java)
+                    callback(user, true, "User  fetched successfully")
+                } else {
+                    callback(null, false, "User  not found")
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                callback(null, false, "Error fetching user: ${error.message}")
+            }
+        })
     }
 
     private val cloudinary = Cloudinary(
