@@ -17,21 +17,17 @@
         android:layout_marginBottom="80dp">
 
         <!-- ViewPager2 for tabbed pages -->
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
     </FrameLayout>
 
     <!-- TabLayout linked to ViewPager2 -->
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="@color/lavender"
-        app:tabMode="fixed"
-        app:tabGravity="fill" />
+<!--    <com.google.android.material.tabs.TabLayout-->
+<!--        android:id="@+id/tab"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="top"-->
+<!--        android:background="@color/lavender"-->
+<!--        app:tabMode="fixed"-->
+<!--        app:tabGravity="fill" />-->
 
     <!-- FloatingActionButton for additional action -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton

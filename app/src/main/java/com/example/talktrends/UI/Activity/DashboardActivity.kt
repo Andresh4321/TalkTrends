@@ -9,26 +9,26 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.example.talktrends.R
+import com.example.talktrends.UI.fragment.FriendsFragment
+import com.example.talktrends.UI.fragment.HomeFragment
 
 import com.example.talktrends.databinding.ActivityDashboardBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import com.example.talktrends.UI.fragment.PopularFragment
+import com.example.talktrends.UI.fragment.ProfileFragment
+import com.example.talktrends.UI.fragment.SettingFragment
 
 class DashboardActivity : AppCompatActivity() {
 
-    lateinit var adapter: PostFragmentAdapter
+
     private lateinit var binding: ActivityDashboardBinding
 
-    var data = arrayOf("Popular", "For You", "Recent")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (resultCode == RESULT_OK) {
-            // When CreateActivity finishes, update PopularFragment
-            val popularFragment = supportFragmentManager.findFragmentByTag("popular") as? PopularFragment
-//            popularFragment?.updatePosts()  // Method to update the fragment
-        }
+
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +36,6 @@ class DashboardActivity : AppCompatActivity() {
         binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        adapter = PostFragmentAdapter(this)
-        binding.view.adapter = adapter // Set the adapter for the ViewPager2
-
-        // Setup tabs
-        TabLayoutMediator(binding.tab, binding.view) { tabs, position ->
-            tabs.text = data[position]
-        }.attach()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.dashboard)) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -59,6 +52,37 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.bottomNavigation.setOnItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.nav_home -> loadFragment(HomeFragment()) // Home tab
+                R.id.nav_friends -> loadFragment(FriendsFragment()) // Friends tab
+                R.id.nav_profile -> loadFragment(ProfileFragment()) // Profile tab
+                R.id.nav_settings -> loadFragment(SettingFragment()) // Settings tab
+                else ->  loadFragment(HomeFragment())
+            }
+            true
+        }
+        // Check for the Intent extra to determine which tab to select
+        val selectedTab = intent.getIntExtra("SELECTED_TAB", R.id.nav_home) // Default to Home tab
+        binding.bottomNavigation.selectedItemId = selectedTab // Select the appropriate tab
+
+        // Optionally, load the corresponding fragment directly if needed
+        if (selectedTab == R.id.nav_profile) {
+            loadFragment(ProfileFragment()) // Force load ProfileFragment if needed
+        }
+        else if (selectedTab == R.id.nav_friends) {
+            loadFragment(FriendsFragment()) // Force load ProfileFragment if needed
+        }
 
     }
-}
+
+
+private fun loadFragment(fragment: Fragment): Boolean {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.frame_layout, fragment)
+            .commit()
+        return true
+    }
+    }
+
+

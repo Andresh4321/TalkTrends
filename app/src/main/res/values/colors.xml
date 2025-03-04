@@ -11,8 +11,10 @@
     <color name="pinkColor">#FF0038</color>
     <color name="transparentColor">#00FFFFFF</color>
     <color name="pink">#995555</color>
-    <color name="light_Red">#A03939</color>
+    <color name="light_Red">#FF7F7F</color>
     <color name="silver">#9E9E9E</color>
     <color name="lavender">#8692f7</color>
     <color name="bla">#909090</color>
+    <color name="blue">#7894DC</color>
+    <color name="grey">#6E6E71</color>
 </resources>
